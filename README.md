@@ -165,17 +165,22 @@ When you create a program, all of the code is loaded into the program under the 
 
 So if your code:
 
-(download "user/lib1")
-(download "user2/lib2")
+	(download "user/lib1")
+	(download "user2/lib2")
 
 And user/lib2 has:
 
-(download "user/lib1")
+	(download "user/lib1")
 
 Then all of the lib1 functions for user/lib2 are in: user2/lib2/user/lib1/proc-name
 and all of your functions for lib1 are in main/user/lib1/proc-name, however you can omit the main/ as it is assumed.
 
 Of course, you don't have to specify namespaces if you don't want to, or if you know that names won't conflict.
+
+All namespaces are relative paths (what a surprise) to the current file.
+
+Since no file that comes in with the (download) form can execute code (if it has a main function or calles it that will not be executed) dependencies matter less. If you really must establish a kind of
+dependency then you can use the full path from the root of the currently executing program, i.e. /main/user/lib1/proc
 
 
 
