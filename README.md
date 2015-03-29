@@ -38,6 +38,7 @@ Sapphire is meant to be take two of my original effort Peridot written in C++11 
 * Comments are part of the program: There is a never ending serious of laments about the lack of documentation and comments. When there isn't a lack, there is a standard/style guide flame war. We are going to head that off at the pass by simply making formatting, indentation, and commenting part of the language itself. 
 * Purely functional: This means everything is a function, and everything is can/should be done with functions.
 * No package managers, they are stoopid.
+* Testing is part of the language
 
 ### Interactive Compiler
 
@@ -182,7 +183,28 @@ All namespaces are relative paths (what a surprise) to the current file.
 Since no file that comes in with the (download) form can execute code (if it has a main function or calles it that will not be executed) dependencies matter less. If you really must establish a kind of
 dependency then you can use the full path from the root of the currently executing program, i.e. /main/user/lib1/proc
 
+### Testing is part of the language
 
+Imagine a language where you DON'T have to install a testing suite to verify your code. Sapphire is
+intended to be such a language:
+
+	(procedure foo(string:a) returns (string) do {
+		(return (+ "Hello " a))
+	})
+	(procedure-test foo do {
+		(assert-result-includes "Hello " when "John")
+		(assert-throws exception-argument when 1)
+		(assert-throws my-custom-exception when 1)
+	})
+	(.run-test foo)
+
+	=>
+	Running tests for procedure foo
+	foo assert-result-includes "Hello" PASSED when given "John"
+	foo assert-throws exception-argument PASSED when given 1 
+	foo assert-throws my-custom-exception FAILED when given 1
+	Full Stop.
+		Assertion failed, foo must throw my-custom-exception when given 1
 
 ## The Compiler
 
