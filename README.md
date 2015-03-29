@@ -206,6 +206,21 @@ intended to be such a language:
 	Full Stop.
 		Assertion failed, foo must throw my-custom-exception when given 1
 
+Now imagine a language that also allows you to develop functionality while it's still incomplete.
+
+Imagine you have been tasked with writing code for one part of the program that depends on the finished code of somebody else. You have the spec, you can use mock results!
+
+	(procedure parse-result-from-foo returns (hash) do {
+		(set str (foo :get-coordinates mock "{x: 1, y: 2}" ))
+		(decode-json str) ;implicit return
+	})
+	(procedure-test parse-result-from-foo do {
+		(assert-result-is hash)
+		(assert-numeric $_[:x]) ; the result of the last function call
+	})
+
+When a function call's arguments are followed by the keyword mock, if that function is not defined, instead of throwing an error, the system will just return the mock's argument as the result.
+
 ## The Compiler
 
 The compiler aspect is supposed to generate assembly code which can then be translated to byte
