@@ -37,6 +37,7 @@ Sapphire is meant to be take two of my original effort Peridot written in C++11 
 * Deployment Tool: Writing a program is meaningless unless we can "deploy" or "deliver" that program to end users.
 * Comments are part of the program: There is a never ending serious of laments about the lack of documentation and comments. When there isn't a lack, there is a standard/style guide flame war. We are going to head that off at the pass by simply making formatting, indentation, and commenting part of the language itself. 
 * Purely functional: This means everything is a function, and everything is can/should be done with functions.
+* No package managers, they are stoopid.
 
 ### Interactive Compiler
 
@@ -140,6 +141,42 @@ and automatically generate the comment block for you. It will automatically fill
 Object Orientation is a WAY of programming, it is not BUILT IN, that's completely idiotic. Almost any programming language will allow you to produce an "Object" oriented program, including C. What most people mean when they say Object Oriented language is that it has Object Oriented Syntactic Sugar (The . Operator) and/or that it includes inheritance of some kind or another. 
 
 Sapphire handles this simply, "Objects" are Hash Tables, if you want them to inherit some functions from another "Object", copy :)
+
+### No Package Managers
+
+I know, sounds weird right? Everyone has a package manager these days, and they all suck. They suck because they are a shitty idea to begin with. When you use a language like PHP or C, you never really think: Wow, I'd like to make the process of sharing and loading code both tedious and obscure!
+
+In Sapphire, the top of your program defines some basic information to identify it, it is the package. There are no ASDFs or separate files. You get code into your file the old fashioned way: You load it. There is no additional weird-ass package manager like Gem.
+
+Think for a moment how stupid Gem is, it's a package manager for Ruby. Do you use Gem? No, you use Bundler. It's a Package manager for the Package Manager. How meta.
+
+With that in mind Sapphire does come with built in support for publishing code and including open-source code in your project. You can either download the code and use something like gitmodules, or you
+can push the code to the main repo if you have an account. The you can use:
+
+	(download "jasonknight/awesome-code")
+
+The (download) call means: check to see if I have have this file in the search path, if so, ask the server if available to give me the modified date of the code, if it's newer, download the new copy, if it's the same, just load from the disk.
+
+If you want to lock the version, files on the server are like so: file-name-0.1.saf, so use:
+
+(download "file-name-0.1") to lock the version. 
+
+When you create a program, all of the code is loaded into the program under the file's namespace. There is no dependency management because all functions exist in a namespace, and all "download"ed code exists in it's subnamespace to yours.
+
+So if your code:
+
+(download "user/lib1")
+(download "user2/lib2")
+
+And user/lib2 has:
+
+(download "user/lib1")
+
+Then all of the lib1 functions for user/lib2 are in: user2/lib2/user/lib1/proc-name
+and all of your functions for lib1 are in main/user/lib1/proc-name, however you can omit the main/ as it is assumed.
+
+Of course, you don't have to specify namespaces if you don't want to, or if you know that names won't conflict.
+
 
 
 ## The Compiler
