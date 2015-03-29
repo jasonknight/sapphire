@@ -101,7 +101,7 @@ Comments for a function can be grabbed with:
     4: (print "#{name}\n")
 
 The idea being that the comments-for function is to get the heading comment which is just before the (procedure ...) call and all other comments in the function numbered from 1 being
-the (procedure ...) line. So the 6: means 6 lines from the call to (procedure ...).
+the (procedure ...) line. So the 4: means 3 lines from the call to (procedure ...).
 
 You can also print out the full code of the function:
 
@@ -118,3 +118,10 @@ You can also print out the full code of the function:
     		(print "#{name}\n")
     	})
     })
+
+Sapphire should have a strict and enforced coding standard, a linter, a compiler, and a deployer, without having to go to any other tool to accomplish these tasks.
+
+## The Compiler
+
+The compiler aspect is supposed to generate assembly code which can then be translated to byte
+code and linked. My hope is that it will support linking to existing C Libraries.
