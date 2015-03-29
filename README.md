@@ -33,7 +33,14 @@ Sapphire is meant to be take two of my original effort Peridot written in C++11 
 
 ## Design Intentions
 
-The design idea behind the language is that it will be 
+* Interactive Compiler: From the ground up the language is intended to be compiled.
+* Deployment Tool: Writing a program is meaningless unless we can "deploy" or "deliver" that program to end users.
+* Comments are part of the program: There is a never ending serious of laments about the lack of documentation and comments. When there isn't a lack, there is a standard/style guide flame war. We are going to head that off at the pass by simply making formatting, indentation, and commenting part of the language itself. 
+* Purely functional: This means everything is a function, and everything is can/should be done with functions.
+
+### Interactive Compiler
+
+The design ideas behind the language is that it will be 
 both interpreted and compiled. 
 
 The definition of each and every function is kept as input, and
@@ -67,6 +74,8 @@ Example:
 
 So we can define the first design intention that it be an interactive compiler.
 
+### Deployment Tool
+
 The second design intention is that it be it's own deployment tool, that it
 knows about deploying to a server, and that it knows some generic method
 of configuring itself.
@@ -80,6 +89,8 @@ hidden from the user unless he so chooses to alter them.
 Because the REPL is scriptable, it should not be very problematic to
 setup the deployment environment from one interpreter to another, as the READ
 of one is simply the WRITE of another.
+
+### Comments are part of the program
 
 The third design intention is perhaps the most important: Comments are program 
 components. Every procedure can and perhaps must be documented with a structured
@@ -121,7 +132,25 @@ You can also print out the full code of the function:
 
 Sapphire should have a strict and enforced coding standard, a linter, a compiler, and a deployer, without having to go to any other tool to accomplish these tasks.
 
+If a comment block is not provided at procedure definition, then the System will ask questions
+and automatically generate the comment block for you. It will automatically fill out the arguments field, and allow you to edit it, as well as the returns field if that information is specified.
+
+### Purely Functional Programming
+
+Object Orientation is a WAY of programming, it is not BUILT IN, that's completely idiotic. Almost any programming language will allow you to produce an "Object" oriented program, including C. What most people mean when they say Object Oriented language is that it has Object Oriented Syntactic Sugar (The . Operator) and/or that it includes inheritance of some kind or another. 
+
+Sapphire handles this simply, "Objects" are Hash Tables, if you want them to inherit some functions from another "Object", copy :)
+
+
 ## The Compiler
 
 The compiler aspect is supposed to generate assembly code which can then be translated to byte
 code and linked. My hope is that it will support linking to existing C Libraries.
+
+## Typing
+
+Right now this particular part of the system is a bit up in the air. The main idea at this point is to allow, and even encourage Type Hints (Which are enforced) otherwise during compilation a version of the procedure would be created for all possible types (leading to huge code). An example would be:
+
+	(procedure my-proc ( number:a number:b ) returns (number) do {
+		(+ a b)
+	})
