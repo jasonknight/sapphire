@@ -45,6 +45,7 @@ When it is finished, you would create a main procedure, and
 then compile.
 
 Example:
+
     > (procedure greet (name) do {
     	(print "Hello #{name}\n");
     	(exit 0)
