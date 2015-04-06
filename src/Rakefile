@@ -1,0 +1,14 @@
+require 'rake/testtask'
+def header(txt)
+	puts "*" * 45
+	puts "* %41s *" % [txt]
+	puts "*" * 45
+end
+task :test do
+	header("Running Tests")
+	Rake::TestTask.new do |t|
+	  t.libs.push "lib"
+	  t.test_files = FileList['test/*.rb']
+	  t.verbose = true
+	end
+end
