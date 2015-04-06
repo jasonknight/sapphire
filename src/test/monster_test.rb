@@ -83,5 +83,16 @@ describe Sapphire::Monster do
         res[0].type.must_equal :string
         res[0].string.include?("this is A \nquoted").must_equal true
     end
+    it "should support match_times, i.e. only match 1 or 3 etc" do
+        mon = Sapphire::Monster.new("Mon", :paren, "(){}[]",true)
+        mon.match_times = 1
+        res1 = mon.consume("(((",0)
+        res2 = mon.consume("(((",res1[1])
+        res3 = mon.consume("(((",res2[1])
+        [res1,res2,res2].each do |r|
+            r[0].class.must_equal Sapphire::Token
+            r[0].type.must_equal :paren
+        end
+    end
 
 end

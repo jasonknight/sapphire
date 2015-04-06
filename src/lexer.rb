@@ -1,4 +1,5 @@
 require 'yaml'
+require './errors'
 module Sapphire
 	class Lexer
 		attr_accessor :pos,
@@ -18,6 +19,9 @@ module Sapphire
 		end
 		def next
 			return nil if @pos >= @string.length
+			if @monsters.empty? then
+				raise Sapphire::LexerError, "you must specify at least one token monster"
+			end
 			consume_whitespace
 			@monsters.each do |mon|
 				res = mon.consume(@string,@pos)
@@ -48,6 +52,15 @@ module Sapphire
 				@pos += 1
 				consume_whitespace
 			end
+		end
+		def tokenize_string(str)
+			@pos = 0
+			@string = str
+			tokens = []
+			while token = self.next do
+				tokens << token
+			end
+			return tokens
 		end
 		def show_state
 			puts YAML.dump(self)

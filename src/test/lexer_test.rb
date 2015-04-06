@@ -79,4 +79,18 @@ describe Sapphire::Lexer do
         t4.class.must_equal NilClass
         t3.string.must_equal "-1,258.9"
     end
+    it "should return tokens of different types as an array" do
+        lex = Sapphire::Lexer.new(test_string)
+        lex.monsters << Sapphire::Monster.new("Numbers",:number, "1234567890.,+-",true,"+-1234567890","1234567890")
+        lex.monsters << Sapphire::Monster.new("Ops",:assign, "=",true)
+        lex.monsters << Sapphire::Monster.new("Ids",:id, "()[]{} \n",nil)
+        tokens = lex.tokenize_string test_assignment
+        tokens.each {|t| t.class.must_equal Sapphire::Token }
+    end
+    it "should raise an error if monsters is empty" do
+        lex = Sapphire::Lexer.new(test_string)
+        assert_raises Sapphire::LexerError do
+                lex.next
+        end
+    end
 end

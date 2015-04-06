@@ -12,3 +12,28 @@ task :test do
 	  t.verbose = true
 	end
 end
+
+task :test_monster do 
+    header("Running Monster Tests")
+    Rake::TestTask.new do |t|
+      t.libs.push "lib"
+      t.test_files = FileList['test/monster*']
+      t.verbose = true
+    end
+end
+task :test_lexer do 
+    header("Running Lexer Tests")
+    Rake::TestTask.new do |t|
+      t.libs.push "lib"
+      t.test_files = FileList['test/lexer*']
+      t.verbose = true
+    end
+end
+task :test_parser do 
+    header("Running Parser Tests")
+    Rake::TestTask.new do |t|
+      t.libs.push "lib"
+      t.test_files = FileList['test/parser*']
+      t.verbose = true
+    end
+end
