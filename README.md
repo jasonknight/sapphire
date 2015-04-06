@@ -1,6 +1,8 @@
 # Sapphire
 
-Sapphire is meant to be take two of my original effort Peridot written in C++11 using clang. Sapphire however will be written in Scheme. 
+Sapphire is meant to be take two of my original effort Peridot written in C++11 using clang. Sapphire however will be written in Ruby.
+I had originally intended to write it in Scheme, however I decided 1) I like Ruby better, 2) Ruby is more accessible to everyone and I would
+hope eventually the project would be useable to someone other than me.
 
 ## The Language
 
@@ -35,14 +37,14 @@ Sapphire is meant to be take two of my original effort Peridot written in C++11 
 
 * Interactive Compiler: From the ground up the language is intended to be compiled.
 * Deployment Tool: Writing a program is meaningless unless we can "deploy" or "deliver" that program to end users.
-* Comments are part of the program: There is a never ending serious of laments about the lack of documentation and comments. When there isn't a lack, there is a standard/style guide flame war. We are going to head that off at the pass by simply making formatting, indentation, and commenting part of the language itself. 
+* Comments are part of the program: There is a never ending series of laments about the lack of documentation and comments. When there isn't a lack, there is a standard/style guide flame war. We are going to head that off at the pass by simply making formatting, indentation, and commenting part of the language itself. 
 * Purely functional: This means everything is a function, and everything is can/should be done with functions.
 * No package managers, they are stoopid.
 * Testing is part of the language
 
 ### Interactive Compiler
 
-The design ideas behind the language is that it will be 
+The design ideas behind the language are that it will be 
 both interpreted and compiled. 
 
 The definition of each and every function is kept as input, and
