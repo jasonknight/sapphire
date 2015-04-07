@@ -1,4 +1,4 @@
 (function *my-func* (x y) returns (number) do {
     (return (+ x y))
 })
-(*my-func* 1 2)
+(*my-func* 1 -2.0)

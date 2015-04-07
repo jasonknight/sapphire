@@ -57,7 +57,6 @@ describe Sapphire::Parser do
         lex.monsters << Sapphire::Monster.new("Ids",:id, "()[]{}.,/ \n",nil)
         p.string(example_saf)
         p.tokens.each do |tkn|
-            puts tkn.inspect
            tkn.class.must_equal Sapphire::Token
         end
         tkn_order = [:paren,:function,:id,:paren,:id,:id,:paren,:returns, :paren,:id,:paren,:do,:paren, :paren,:return, :paren, :id, :id, :id,
@@ -66,6 +65,8 @@ describe Sapphire::Parser do
             i = tkn_order.index tkn_sym
             p.tokens[i].type.must_equal tkn_sym
         end
+        nodes = p.create_tree
+        p.pretty_print_tree p.tree
 
     end
 end

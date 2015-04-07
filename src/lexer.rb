@@ -58,6 +58,8 @@ module Sapphire
 			@string = str
 			tokens = []
 			while token = self.next do
+				token.line = self.line
+				token.file = "StringInput(#{@string.length})"
 				tokens << token
 			end
 			return tokens
